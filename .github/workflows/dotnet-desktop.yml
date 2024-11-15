@@ -47,6 +47,14 @@ jobs:
       with:
         fetch-depth: 0
 
+    # Ensure .editorconfig exists in all solution directories
+    - name: Apply .editorconfig to all solutions
+      run: |
+        for solution in ${{ matrix.solution }}; do
+          solution_dir=$(dirname "$solution")
+          cp .editorconfig "$solution_dir/.editorconfig"
+        done
+
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
