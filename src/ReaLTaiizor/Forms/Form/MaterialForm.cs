@@ -1344,15 +1344,16 @@ namespace ReaLTaiizor.Forms
                     textLocation.Size,
                     MaterialNativeTextRenderer.TextAlignFlags.Left | MaterialNativeTextRenderer.TextAlignFlags.Middle);
             }
-            else if (ControlBox == true && _formStyle == FormStyles.ActionBar_None) 
+            else if (ControlBox == true && _formStyle == FormStyles.ActionBar_None)
             {
-               using MaterialNativeTextRenderer NativeText = new(g);
-                Rectangle textLocation = new(12, 5, ClientSize.Width, ClientSize.Height);
+                //Form title
+                using MaterialNativeTextRenderer NativeText = new(g);
+                Rectangle textLocation = new(10, 4, ClientSize.Width, ClientSize.Height);
                 NativeText.DrawTransparentText(Text, SkinManager.GetLogFontByType(MaterialSkinManager.FontType.Subtitle2),
-                   SkinManager.ColorScheme.TextColor,
-                   textLocation.Location,
-                   textLocation.Size,
-                   MaterialNativeTextRenderer.TextAlignFlags.Left | MaterialNativeTextRenderer.TextAlignFlags.Top);
+                    SkinManager.ColorScheme.TextColor,
+                    textLocation.Location,
+                    textLocation.Size,
+                    MaterialNativeTextRenderer.TextAlignFlags.Left | MaterialNativeTextRenderer.TextAlignFlags.Top);
            }
         }
         #endregion
