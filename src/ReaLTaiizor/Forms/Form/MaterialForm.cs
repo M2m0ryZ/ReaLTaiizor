@@ -1348,7 +1348,7 @@ namespace ReaLTaiizor.Forms
             {
                using MaterialNativeTextRenderer NativeText = new(g);
                 Rectangle textLocation = new(12, 5, ClientSize.Width, ClientSize.Height);
-                NativeText.DrawTransparentText(Text, SkinManager.GetLogFontByType(MaterialSkinManager.FontType.Caption),
+                NativeText.DrawTransparentText(Text, SkinManager.GetLogFontByType(MaterialSkinManager.FontType.Subtitle2),
                    SkinManager.ColorScheme.TextColor,
                    textLocation.Location,
                    textLocation.Size,
