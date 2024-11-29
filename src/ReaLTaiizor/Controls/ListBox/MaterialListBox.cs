@@ -537,10 +537,12 @@ namespace ReaLTaiizor.Controls
         public void AddItems(MaterialListBoxItem[] newItems)
         {
             _updating = true;
+            _scrollBar.BeginUpdate();
             foreach (MaterialListBoxItem str in newItems)
             {
                 AddItem(str);
             }
+            _scrollBar.EndUpdate();
             _updating = false;
 
             InvalidateScroll(this, null);
@@ -550,10 +552,12 @@ namespace ReaLTaiizor.Controls
         public void AddItems(string[] newItems)
         {
             _updating = true;
+            _scrollBar.BeginUpdate();
             foreach (string str in newItems)
             {
                 AddItem(str);
             }
+            _scrollBar.EndUpdate();
             _updating = false;
 
             InvalidateScroll(this, null);
@@ -592,6 +596,7 @@ namespace ReaLTaiizor.Controls
         public void RemoveItems(MaterialListBoxItem[] itemsToRemove)
         {
             _updating = true;
+            _scrollBar.BeginUpdate();
             foreach (MaterialListBoxItem item in itemsToRemove)
             {
                 if (Items.IndexOf(item) <= _selectedIndex)
@@ -601,6 +606,7 @@ namespace ReaLTaiizor.Controls
                 }
                 Items.Remove(item);
             }
+            _scrollBar.EndUpdate();
             _updating = false;
 
             InvalidateScroll(this, null);
@@ -609,7 +615,7 @@ namespace ReaLTaiizor.Controls
 
         private void update_selection()
         {
-            if (_selectedIndex >= 0)
+            if (_selectedIndex >= 0 && _selectedIndex < Items.Count)
             {
                 _selectedItem = Items[_selectedIndex];
                 SelectedValue = Items[_selectedIndex];
@@ -626,10 +632,12 @@ namespace ReaLTaiizor.Controls
         public void Clear()
         {
             _updating = true;
+            _scrollBar.BeginUpdate();
             for (int i = Items.Count - 1; i >= 0; i += -1)
             {
                 Items.RemoveAt(i);
             }
+            _scrollBar.EndUpdate();
             _updating = false;
             _selectedIndex = -1;
             update_selection();
@@ -641,11 +649,13 @@ namespace ReaLTaiizor.Controls
         public void BeginUpdate()
         {
             _updating = true;
+            _scrollBar.BeginUpdate();
         }
 
         public void EndUpdate()
         {
             _updating = false;
+            _scrollBar.EndUpdate();
         }
 
         #endregion Methods
