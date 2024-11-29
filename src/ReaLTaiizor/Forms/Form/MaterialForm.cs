@@ -148,6 +148,23 @@ namespace ReaLTaiizor.Forms
         }
 
         [Category("Drawer")]
+        public bool DrawerUsePreProcessIcons
+        {
+            get => _drawerUsePreProcessIcons;
+            set
+            {
+                if (_drawerUsePreProcessIcons == value) return;
+
+                _drawerUsePreProcessIcons = value;
+
+                if (drawerControl == null) return;
+
+                drawerControl.UsePreProcessIcons = value;
+                drawerControl.Refresh();
+            }
+        }
+
+        [Category("Drawer")]
         public bool DrawerHighlightWithAccent
         {
             get => _drawerHighlightWithAccent;
@@ -435,6 +452,7 @@ namespace ReaLTaiizor.Forms
         private bool _drawerAutoShow;
         private bool _drawerIsOpen;
         private bool _drawerUseColors;
+        private bool _drawerUsePreProcessIcons;
         private bool _drawerHighlightWithAccent;
         private bool _backgroundWithAccent;
         private MaterialDrawer drawerControl = new();
@@ -452,6 +470,7 @@ namespace ReaLTaiizor.Forms
             DrawerAutoHide = true;
             DrawerAutoShow = false;
             DrawerIndicatorWidth = 0;
+            DrawerUsePreProcessIcons = true;
             DrawerHighlightWithAccent = true;
             DrawerShowIconsWhenHidden = false;
             DrawerBackgroundWithAccent = false;

@@ -83,6 +83,23 @@ namespace ReaLTaiizor.Controls
         }
 
         [Category("Drawer")]
+        private bool _usePreProcessIcons;
+
+        public bool UsePreProcessIcons
+        {
+            get
+            {
+                return _usePreProcessIcons;
+            }
+            set
+            {
+                _usePreProcessIcons = value;
+                preProcessIcons();
+                Invalidate();
+            }
+        }
+
+        [Category("Drawer")]
         private bool _highlightWithAccent;
 
         public bool HighlightWithAccent
@@ -293,8 +310,27 @@ namespace ReaLTaiizor.Controls
                     new float[] {   0,   0,   0,   1,  0}, // alpha scale factor
                     new float[] {   r,   g,   b,   0,  1}};// offset
 
-            ColorMatrix colorMatrixGray = new(matrixGray);
-            ColorMatrix colorMatrixColor = new(matrixColor);
+            // Create matrices
+            float[][] matrixStandard = {
+                    new float[] {   1,   0,   0,   0,  0}, // Red scale factor
+                    new float[] {   0,   1,   0,   0,  0}, // Green scale factor
+                    new float[] {   0,   0,   1,   0,  0}, // Blue scale factor
+                    new float[] {   0,   0,   0,   1,  0}, // alpha scale factor
+                    new float[] {   0,   0,   0,   0,  0}};// offset
+
+            ColorMatrix colorMatrixGray = new();
+            ColorMatrix colorMatrixColor = new();
+
+            if (_usePreProcessIcons)
+            {
+                colorMatrixGray = new ColorMatrix(matrixGray);
+                colorMatrixColor = new ColorMatrix(matrixColor);
+            }
+            else
+            {
+                colorMatrixGray = new ColorMatrix(matrixStandard);
+                colorMatrixColor = new ColorMatrix(matrixStandard);
+            }
 
             ImageAttributes grayImageAttributes = new();
             ImageAttributes colorImageAttributes = new();

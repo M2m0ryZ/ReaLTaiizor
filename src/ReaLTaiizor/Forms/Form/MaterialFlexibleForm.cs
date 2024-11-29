@@ -119,7 +119,7 @@ namespace ReaLTaiizor.Forms
             this.richTextBoxMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.MaterialFlexibleFormBindingSource, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.richTextBoxMessage.Depth = 0;
-            this.richTextBoxMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+            this.richTextBoxMessage.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
             this.richTextBoxMessage.ForeColor = System.Drawing.Color.FromArgb((int)(byte)222, (int)(byte)0, (int)(byte)0, (int)(byte)0);
             this.richTextBoxMessage.Location = new System.Drawing.Point(56, 12);
             this.richTextBoxMessage.Margin = new System.Windows.Forms.Padding(0);

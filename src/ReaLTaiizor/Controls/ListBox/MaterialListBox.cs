@@ -441,7 +441,7 @@ namespace ReaLTaiizor.Controls
                 string itemText = Items[i].Text;
                 string itemSecondaryText = Items[i].SecondaryText;
 
-                Rectangle itemRect = new Rectangle(0, (i - firstItem) * _itemHeight - itemOffset, Width - (_showScrollBar && _scrollBar.Visible ? _scrollBar.Width : 0), _itemHeight);
+                Rectangle itemRect = new(0, (i - firstItem) * _itemHeight - itemOffset, Width - (_showScrollBar && _scrollBar.Visible ? _scrollBar.Width : 0), _itemHeight);
 
                 if (MultiSelect && _indicates.Count != 0)
                 {
