@@ -146,6 +146,7 @@ namespace ReaLTaiizor.Controls
 
         public ForeverListBox()
         {
+            ListBx = new ListBox();
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.OptimizedDoubleBuffer, true);
             DoubleBuffered = true;
 
