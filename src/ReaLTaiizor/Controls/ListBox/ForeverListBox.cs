@@ -54,7 +54,7 @@ namespace ReaLTaiizor.Controls
         {
             get
             {
-                return ListBx.Items.OfType<object>().ToArray();
+                return ListBx.Items.Cast<object>().OfType<object>().ToArray();
             }
         }
         public object ListSelectedItem => ListBx.Items[SelectedIndex];
