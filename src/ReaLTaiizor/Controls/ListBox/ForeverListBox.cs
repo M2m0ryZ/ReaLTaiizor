@@ -2,10 +2,12 @@
 
 using ReaLTaiizor.Colors;
 using ReaLTaiizor.Util;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 #endregion
@@ -35,10 +37,10 @@ namespace ReaLTaiizor.Controls
             }
         }
 
-        private string[] _items = { "" };
+        private string[] _items = Array.Empty<string>();
 
         [Category("Options")]
-        public string[] items
+        public string[] Items
         {
             get => _items;
             set
@@ -50,21 +52,37 @@ namespace ReaLTaiizor.Controls
             }
         }
 
-        public object[] ListItems
+        public object ListSelectedItem
         {
             get
             {
-                return ListBx.Items.Cast<object>().OfType<object>().ToArray();
+                if (Items.Any() && Items.Count() >= SelectedIndex)
+                {
+                    return ListBx.Items[SelectedIndex];
+                }
+
+                return null;
             }
         }
-        public object ListSelectedItem => ListBx.Items[SelectedIndex];
-        
+
         [Category("Colors")]
         public Color SelectedColor { get; set; } = ForeverLibrary.ForeverColor;
 
-        public string SelectedItem =>
+        public string SelectedItem
+        {
+            get
+            {
                 //return ListBx.SelectedItem.ToString();
-                (string)ListBx.Items[SelectedIndex];
+
+                if (Items.Any() && Items.Count() >= SelectedIndex)
+                {
+                    return (string)ListSelectedItem;
+                }
+
+                return string.Empty;
+            }
+            set => ListBx.SelectedItem = value;
+        }
 
         public int SelectedIndex
         {
@@ -77,7 +95,14 @@ namespace ReaLTaiizor.Controls
                     return functionReturnValue;
                 }
 
-                return functionReturnValue;
+                return ListBx.SelectedIndex;
+            }
+            set
+            {
+                if (Items.Any() && Items.Count() - 1 >= value && value >= 0)
+                {
+                    ListBx.SelectedIndex = value;
+                }
             }
         }
 
@@ -96,7 +121,7 @@ namespace ReaLTaiizor.Controls
 
         public void Drawitem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0)
+            if (e.Index < 0 || !Items.Any())
             {
                 return;
             }
@@ -106,8 +131,8 @@ namespace ReaLTaiizor.Controls
 
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             //-- if selected
             if (e.State.ToString().IndexOf("Selected,") >= 0)
@@ -133,6 +158,7 @@ namespace ReaLTaiizor.Controls
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
+
             if (!Controls.Contains(ListBx))
             {
                 Controls.Add(ListBx);
@@ -141,13 +167,11 @@ namespace ReaLTaiizor.Controls
 
         public void AddRange(object[] items)
         {
-            ListBx.Items.Remove("");
             ListBx.Items.AddRange(items);
         }
 
         public void AddItem(object item)
         {
-            ListBx.Items.Remove("");
             ListBx.Items.Add(item);
         }
 
@@ -156,10 +180,11 @@ namespace ReaLTaiizor.Controls
         public ForeverListBox()
         {
             ListBx = new ListBox();
+
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.OptimizedDoubleBuffer, true);
             DoubleBuffered = true;
 
-            ListBx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            ListBx.DrawMode = DrawMode.OwnerDrawFixed;
             ListBx.ScrollAlwaysVisible = false;
             ListBx.HorizontalScrollbar = false;
             ListBx.BorderStyle = BorderStyle.None;
@@ -189,7 +214,6 @@ namespace ReaLTaiizor.Controls
             _with19.PixelOffsetMode = PixelOffsetMode.HighQuality;
             _with19.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             _with19.Clear(BackColor);
-
             //-- Size
             ListBx.Size = new(Width - 6, Height - 2);
 

@@ -102,6 +102,19 @@ Gracias a estas personas maravillosas ([emoji clave](https://allcontributors.org
             <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=toolgood" title="Solicitudes de Extracción Revisadas">👀</a>
         </td>
     </tr>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/gmono">
+                <img src="https://avatars3.githubusercontent.com/u/19236339?s=460&v=4" width="80px;" alt="gmono" />
+                <br />
+                <sub>
+                    <b>gmono</b>
+                </sub>
+            </a>
+            <br />
+            <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=gmono" title="Solicitudes de Extracción Revisadas">👀</a>
+        </td>
+    </tr>
 </table>
 
 Este proyecto sigue la especificación de [todos los contribuyentes](https://github.com/all-contributors/all-contributors). ¡Contribuciones de cualquier tipo de bienvenida!
