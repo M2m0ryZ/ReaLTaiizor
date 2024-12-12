@@ -102,6 +102,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
             <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=toolgood" title="Reviewed Pull Requests">👀</a>
         </td>
     </tr>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/gmono">
+                <img src="https://avatars3.githubusercontent.com/u/19236339?s=460&v=4" width="80px;" alt="gmono" />
+                <br />
+                <sub>
+                    <b>gmono</b>
+                </sub>
+            </a>
+            <br />
+            <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=gmono" title="Reviewed Pull Requests">👀</a>
+        </td>
+    </tr>
 </table>
 
 This project follows the [all contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

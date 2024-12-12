@@ -102,6 +102,19 @@ Bu harika insanlara teşekkürler ([emoji anahtarı](https://allcontributors.org
             <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=toolgood" title="İncelenen Çekme İstekleri">👀</a>
         </td>
     </tr>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/gmono">
+                <img src="https://avatars3.githubusercontent.com/u/19236339?s=460&v=4" width="80px;" alt="gmono" />
+                <br />
+                <sub>
+                    <b>gmono</b>
+                </sub>
+            </a>
+            <br />
+            <a href="https://github.com/Taiizor/ReaLTaiizor/commits?author=gmono" title="İncelenen Çekme İstekleri">👀</a>
+        </td>
+    </tr>
 </table>
 
 Bu proje [tüm katkıda bulunanların](https://github.com/all-contributors/all-contributors) özelliklerini takip ediyor. Her türlü katkıda hoş geldiniz!
