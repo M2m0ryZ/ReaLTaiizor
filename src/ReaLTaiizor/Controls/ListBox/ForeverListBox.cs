@@ -2,11 +2,14 @@
 
 using ReaLTaiizor.Colors;
 using ReaLTaiizor.Util;
+
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System;
+using System.Linq;
 
 #endregion
 
