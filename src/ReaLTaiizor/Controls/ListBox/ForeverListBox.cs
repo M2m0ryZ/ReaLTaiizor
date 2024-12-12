@@ -60,7 +60,11 @@ namespace ReaLTaiizor.Controls
                 return ListBx.Items.OfType<object>().ToArray();
             }
         }
-        public object ListSelectedItem => ListBx.Items[SelectedIndex];
+        public object ListSelectedItem {
+            get{
+                return ListBx.Items[SelectedIndex];
+            }
+        }
         
         [Category("Colors")]
         public Color SelectedColor { get; set; } = ForeverLibrary.ForeverColor;
