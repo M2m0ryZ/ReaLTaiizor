@@ -1,8 +1,9 @@
-﻿#region Imports
+#region Imports
 
 using ReaLTaiizor.Colors;
 using ReaLTaiizor.Util;
 using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -49,6 +50,15 @@ namespace ReaLTaiizor.Controls
                 ListBx.Items.Clear();
                 ListBx.Items.AddRange(value);
                 Invalidate();
+            }
+        }
+
+        public object[] ListItems
+        {
+            get
+            {
+                return ListBx.Items.OfType<object>().ToArray();
+                //return ListBx.Items.Cast<object>().OfType<object>().ToArray();
             }
         }
 
