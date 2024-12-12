@@ -3,6 +3,7 @@
 using ReaLTaiizor.Colors;
 using ReaLTaiizor.Util;
 using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
