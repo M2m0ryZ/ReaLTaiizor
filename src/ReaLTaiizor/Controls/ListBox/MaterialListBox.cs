@@ -34,7 +34,6 @@ namespace ReaLTaiizor.Controls
         private int _selectedIndex;
         private MaterialListBoxItem _selectedItem;
         private bool _showScrollBar;
-        private bool _multiKeyDown;
         private int _hoveredItem;
         private MaterialScrollBar _scrollBar;
         private bool _smoothScrolling = true;
@@ -291,7 +290,6 @@ namespace ReaLTaiizor.Controls
             Items.CollectionChanged += InvalidateScroll;
             SelectedItems = new List<object>();
             _indicates = new List<object>();
-            _multiKeyDown = false;
             _scrollBar = new MaterialScrollBar()
             {
                 Orientation = MateScrollOrientation.Vertical,
@@ -403,15 +401,14 @@ namespace ReaLTaiizor.Controls
             int itemOffset = SmoothScrolling ? _scrollBar.Value - (firstItem * _itemHeight) : 0;
 
             // Calculate the last item
-            int lastItem = (_scrollBar.Value / _itemHeight) + ((Height + itemOffset) / _itemHeight) + 1 > Items.Count ?
-            Items.Count :
-            (_scrollBar.Value / _itemHeight) + ((Height + itemOffset) / _itemHeight) + 1;
+            int lastItem = (_scrollBar.Value / _itemHeight) + ((Height + itemOffset) / _itemHeight) + 1 > Items.Count ? Items.Count : (_scrollBar.Value / _itemHeight) + ((Height + itemOffset) / _itemHeight) + 1;
 
             g.FillRectangle(Enabled ? SkinManager.BackgroundBrush : SkinManager.BackgroundDisabledBrush, mainRect);
 
             //Set TextAlignFlags
             MaterialNativeTextRenderer.TextAlignFlags primaryTextAlignFlags;
             MaterialNativeTextRenderer.TextAlignFlags secondaryTextAlignFlags = MaterialNativeTextRenderer.TextAlignFlags.Left | MaterialNativeTextRenderer.TextAlignFlags.Top;
+            
             if (_style is ListBoxStyle.TwoLine or ListBoxStyle.ThreeLine)
             {
                 primaryTextAlignFlags = MaterialNativeTextRenderer.TextAlignFlags.Left | MaterialNativeTextRenderer.TextAlignFlags.Bottom;
@@ -451,10 +448,7 @@ namespace ReaLTaiizor.Controls
                     }
                     else if (_indicates.Contains(i))
                     {
-                        g.FillRectangle(Enabled ?
-                            SelectedBrush :
-                            new SolidBrush(BlendColor(SelectedColor, SkinManager.SwitchOffDisabledThumbColor, 197)),
-                            itemRect);
+                        g.FillRectangle(Enabled ? SelectedBrush : new SolidBrush(BlendColor(SelectedColor, SkinManager.SwitchOffDisabledThumbColor, 197)), itemRect);
                     }
                 }
                 else
@@ -465,10 +459,7 @@ namespace ReaLTaiizor.Controls
                     }
                     else if (i == SelectedIndex)
                     {
-                        g.FillRectangle(Enabled ?
-                            SelectedBrush :
-                            new SolidBrush(BlendColor(SelectedColor, SkinManager.SwitchOffDisabledThumbColor, 197)),
-                            itemRect);
+                        g.FillRectangle(Enabled ? SelectedBrush : new SolidBrush(BlendColor(SelectedColor, SkinManager.SwitchOffDisabledThumbColor, 197)), itemRect);
                     }
                 }
 
@@ -497,7 +488,7 @@ namespace ReaLTaiizor.Controls
                 NativeText.DrawTransparentText(
                 itemText,
                 _primaryFont,
-                Enabled ? (i != SelectedIndex || UseAccentColor) ?
+                Enabled ? ((i != SelectedIndex && !_indicates.Contains(i)) || UseAccentColor) ?
                 SkinManager.TextHighEmphasisColor :
                 SkinManager.ColorScheme.TextColor :
                 SkinManager.TextDisabledOrHintColor, // Disabled
@@ -733,10 +724,25 @@ namespace ReaLTaiizor.Controls
 
                 if (index >= 0 && index < Items.Count)
                 {
-                    if (MultiSelect && _multiKeyDown)
+                    if (MultiSelect && (ModifierKeys == Keys.Control || ModifierKeys == Keys.Shift))
                     {
+                        if (SelectedIndex >= 0)
+                        {
+                            if (!_indicates.Contains(SelectedIndex))
+                            {
+                                _indicates.Add(SelectedIndex);
+                            }
+                            if (!SelectedItems.Contains(Items[SelectedIndex]))
+                            {
+                                SelectedItems.Add(Items[SelectedIndex]);
+                            }
+
+                            SelectedIndex = -1;
+                        }
+
                         _indicates.Add(index);
                         SelectedItems.Add(Items[index]);
+                        SelectedValueChanged?.Invoke(this, Items[index]);
                     }
                     else
                     {
