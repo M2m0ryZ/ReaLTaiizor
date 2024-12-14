@@ -346,7 +346,7 @@ namespace ReaLTaiizor.Controls
 
             if (hover_close & e.Button == MouseButtons.Left)
             {
-                Application.Exit();
+                pf.Close();
             }
         }
 

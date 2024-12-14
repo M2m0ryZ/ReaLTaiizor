@@ -14,7 +14,6 @@ namespace ReaLTaiizor.Controls
 
     public class ThunderControlBox : Control
     {
-
         #region Properties
 
         private bool _DefaultLocation = true;
